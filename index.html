@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Português de Portugal</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Português">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f5f7fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1424" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;-webkit-text-size-adjust:100%}
+img{max-width:100%}
+/* Layout: one narrow study column under an azulejo tile band; sticky tab bar; tap-to-hear rows. */
+:root{
+  --paper:#f5f7fb; --card:#ffffff; --ink:#14213d; --muted:#56627a; --line:#d9e1ee;
+  --cobalt:#1f4e9c; --tile:#e3eaf6; --ochre:#94600f; --ok:#2f7d4f;
+  --display:"Young Serif", Georgia, "Times New Roman", serif;
+  --body:"Atkinson Hyperlegible", -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0d1424; --card:#141d31; --ink:#e7edf8; --muted:#9aa8c2; --line:#26324c;
+  --cobalt:#8db0f0; --tile:#18233d; --ochre:#e0a94a; --ok:#6cc391; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0d1424; --card:#141d31; --ink:#e7edf8; --muted:#9aa8c2; --line:#26324c;
+  --cobalt:#8db0f0; --tile:#18233d; --ochre:#e0a94a; --ok:#6cc391; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.tr{display:flex;flex-direction:column;gap:8px}
+.tr .lbl{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt);font-weight:700}
+.trbtn{align-self:flex-start}
+.ph.ai{border-color:var(--cobalt)}
+.mv{flex:1 1 200px;min-width:0;font:inherit;font-size:.9rem;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:100%;word-break:break-all}
+.snd{color:var(--ochre);font-size:.84rem;font-style:italic;letter-spacing:.01em}
+.ph .tip{color:var(--muted);font-size:.85rem}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.tiles{height:56px;background-color:var(--tile);
+  background-image:
+   radial-gradient(circle at 50% 50%, var(--cobalt) 0 5px, transparent 6px),
+   radial-gradient(circle at 0 0, transparent 13px, var(--cobalt) 14px 16px, transparent 17px),
+   radial-gradient(circle at 100% 0, transparent 13px, var(--cobalt) 14px 16px, transparent 17px),
+   radial-gradient(circle at 0 100%, transparent 13px, var(--cobalt) 14px 16px, transparent 17px),
+   radial-gradient(circle at 100% 100%, transparent 13px, var(--cobalt) 14px 16px, transparent 17px);
+  background-size:28px 28px;opacity:.85}
+header .wrap{padding-block:18px 8px}
+h1{font-family:var(--display);font-weight:400;font-size:2rem;line-height:1.1;margin:0;color:var(--cobalt);text-wrap:balance}
+.sub{color:var(--muted);margin:.35rem 0 0;font-size:.95rem}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;padding-block:8px;overflow-x:auto}
+nav .sbar{padding-block:0 10px;position:relative;overflow:visible}
+nav .sbar input{width:100%;flex:1;padding-right:44px}
+input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.qx{position:absolute;right:max(24px,calc(env(safe-area-inset-right,0px) + 8px));top:5px;border:0;background:none;color:var(--muted);font-size:1rem;width:36px;height:36px;cursor:pointer}
+.tr{background:var(--card);border:1px solid var(--cobalt);border-radius:14px;padding:12px}
+.tr .grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+nav a{flex:1;text-align:center;text-decoration:none;color:var(--muted);font-weight:700;padding:9px 10px;border-radius:999px;white-space:nowrap;font-size:.95rem}
+nav a[aria-current="page"]{background:var(--cobalt);color:var(--paper)}
+nav a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+main .wrap{padding-block:16px 48px;display:flex;flex-direction:column;gap:16px}
+h2{font-family:var(--display);font-weight:400;font-size:1.45rem;margin:0;text-wrap:balance}
+h3{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt);margin:8px 0 0}
+p{margin:0}
+.note{color:var(--muted);font-size:.93rem;max-width:65ch}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--ink);font:inherit;font-size:.9rem;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--cobalt);color:var(--paper)}
+.voice{font-size:.85rem;padding:8px 12px;border-radius:10px;background:var(--tile);color:var(--ink)}
+.voice.warn{border-left:4px solid var(--ochre)}
+input[type=search]{flex:1 1 180px;min-width:0;font:inherit;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.88rem;padding:6px 12px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.track{flex:1;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.track i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.w{display:flex;align-items:stretch;background:var(--card);border:1px solid var(--line);border-radius:12px;min-width:0}
+.w .say{flex:1;min-width:0;text-align:left;background:none;border:0;color:inherit;font:inherit;padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.pt{font-weight:700;font-size:1.05rem;color:var(--ink)}
+.pt::before{content:"";display:inline-block;width:.7em;height:.7em;margin-right:.45em;vertical-align:.02em;
+  background:var(--cobalt);clip-path:polygon(0 30%,35% 30%,75% 0,75% 100%,35% 70%,0 70%)}
+.en{color:var(--muted);font-size:.9rem}
+.quiz .w:not(.reveal) .en{color:transparent;background:var(--tile);border-radius:4px}
+.w.known{border-color:var(--ok)}
+.know{flex:none;width:46px;border:0;border-left:1px solid var(--line);background:none;color:var(--line);cursor:pointer;font-size:1.2rem;border-radius:0 12px 12px 0}
+.w.known .know{color:var(--ok)}
+.w.speaking,.ph.speaking{box-shadow:0 0 0 2px var(--cobalt)}
+.list{display:flex;flex-direction:column;gap:8px}
+.ph{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.ph .say{flex:1;min-width:0;text-align:left;background:none;border:0;color:inherit;font:inherit;padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.slow{flex:none;border:0;background:var(--tile);color:var(--cobalt);font:inherit;font-size:.78rem;font-weight:700;padding:6px 10px;margin-right:8px;border-radius:999px;cursor:pointer}
+.sound{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.sound b{font-family:var(--display);font-weight:400;font-size:1.15rem;color:var(--cobalt)}
+.ex{display:flex;flex-wrap:wrap;gap:6px}
+.ex button{border:1px solid var(--line);background:var(--paper);color:var(--ink);font:inherit;font-size:.92rem;padding:5px 10px;border-radius:8px;cursor:pointer}
+.ex small{color:var(--muted)}
+.week{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.week.done{border-color:var(--ok)}
+.wk{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.wk span{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ochre);font-weight:700}
+.week ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:3px}
+.week .acts{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--cobalt);background:none;color:var(--cobalt);font:inherit;font-size:.88rem;font-weight:700;padding:6px 12px;border-radius:999px;cursor:pointer}
+.btn.fill{background:var(--cobalt);color:var(--paper)}
+.daily{background:var(--tile);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.daily ol{margin:0;padding-left:1.2em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="tiles" aria-hidden="true"></div>
+<header><div class="wrap">
+  <h1>Português de Portugal</h1>
+  <p class="sub">Offline edition. 200 core words, the phrases you'll actually need, and an 8-week plan. Tap anything to hear it.</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="#words" data-v="words">Words</a>
+  <a href="#phrases" data-v="phrases">Phrases</a>
+  <a href="#sounds" data-v="sounds">Sounds</a>
+  <a href="#plan" data-v="plan">Plan</a>
+</div>
+<div class="wrap sbar"><input id="q" type="search" placeholder="Search, or type English to translate" aria-label="Search or translate" enterkeyhint="go" autocomplete="off"><button id="qx" class="qx" type="button" aria-label="Clear search" hidden>✕</button></div></nav>
+
+<main><div class="wrap">
+  <section id="tr" class="tr" hidden aria-live="polite"></section>
+  <div class="bar">
+    <div id="voice" class="voice">Checking for a Portugal voice…</div>
+    <div id="net" class="voice">Offline app. Works without a connection.</div>
+    <div class="seg" role="group" aria-label="Speed">
+      <button id="spSlow" type="button" aria-pressed="false">Slow</button>
+      <button id="spNorm" type="button" aria-pressed="true">Normal</button>
+    </div>
+  </div>
+
+  <section id="v-words" class="list">
+    <h2>The 200 words</h2>
+    <p class="note">These cover roughly half of everyday speech. Tap a card to hear it, tap ✓ when you know it. Quiz mode hides the English.</p>
+    <div class="progress"><span id="kcount">0 / 200 known</span><div class="track"><i id="kbar"></i></div></div>
+    <div class="bar">
+      <div class="seg" role="group" aria-label="Mode"><button id="quizBtn" type="button" aria-pressed="false">Quiz</button></div>
+    </div>
+    <div id="chips" class="chips"></div>
+    <div id="wgrid" class="grid"></div>
+  </section>
+
+  <section id="v-phrases" class="list" hidden>
+    <h2>Phrases for real life</h2>
+    <p class="note">Built from the 200 words, grouped by the situations that fill most days in Portugal. Use <b>Slow</b> first, then shadow at normal speed. In the sound guide, CAPITALS mark the stressed syllable and ' marks a vowel you barely say. Phrases and guides follow how people talk in Porto and the Minho. The iPhone voice speaks standard Lisbon Portuguese, so follow the guide for the Northern sounds.</p>
+    <div id="plist" class="list"></div>
+  </section>
+
+  <section id="v-sounds" class="list" hidden>
+    <h2>How Portugal sounds</h2>
+    <p class="note">European Portuguese swallows unstressed vowels and turns many S's into "sh". This is the biggest difference from Brazilian, so learn the first ten rules first. Rules 11 to 14 are what make Porto and the Minho sound different from Lisbon.</p>
+    <div id="slist" class="list"></div>
+  </section>
+
+  <section id="v-plan" class="list" hidden>
+    <h2>8-week fast start</h2>
+    <p class="note">About 25 new words a week, 20 to 30 minutes a day. By week 8 you can handle cafés, shops, trains and basic paperwork, and you're on the road to the A2 (CIPLE) level.</p>
+    <div class="daily">
+      <h3 style="margin:0">Every day</h3>
+      <ol>
+        <li>5 min: replay this week's Sounds rule.</li>
+        <li>10 min: Words in Quiz mode. Say it before you tap.</li>
+        <li>10 min: Phrases. Play, pause, repeat aloud (shadowing).</li>
+        <li>1 min out loud: describe your day using 3 new words.</li>
+      </ol>
+    </div>
+    <div id="weeks" class="list"></div>
+    <div class="week" id="move">
+      <div class="wk"><h2>Move your progress</h2></div>
+      <p class="note">Copy a code from one version (online or offline app) and paste it into the other. Ticked words and finished weeks are added, never removed.</p>
+      <div class="acts"><button id="mvCopy" class="btn fill" type="button">Copy progress code</button></div>
+      <textarea id="mvCode" class="mv" rows="3" readonly hidden aria-label="Your progress code"></textarea>
+      <div class="acts"><input id="mvIn" class="mv" type="text" placeholder="Paste a progress code" aria-label="Paste a progress code" autocomplete="off"><button id="mvGo" class="btn" type="button">Add progress</button></div>
+      <p id="mvMsg" class="note" aria-live="polite"></p>
+    </div>
+    <div class="week">
+      <div class="wk"><h2>After week 8</h2></div>
+      <ul>
+        <li>Grow to 1,000 words. That gets you to about 80% of everyday conversation.</li>
+        <li>Use resources made for Portugal, not Brazil: RTP Play (free Portuguese TV), Practice Portuguese, and Portuguese podcasts.</li>
+        <li>Book a weekly conversation lesson with a tutor from Portugal.</li>
+        <li>Work through past CIPLE (A2) sample papers from CAPLE.</li>
+      </ul>
+    </div>
+  </section>
+</div></main>
+
+<script>
+const CATS={E:["Essentials",1],P:["People",2],V:["Verbs",3],N:["Numbers",3],Q:["Questions & links",4],T:["Time",5],L:["Places & things",6],F:["Food & drink",6],D:["This, that, how much",7],A:["Describing",7]};
+const WORDS=`E|olá|hello
+E|bom dia|good morning
+E|boa tarde|good afternoon
+E|boa noite|good evening, good night
+E|adeus|goodbye
+E|tchau|bye (casual)
+E|até logo|see you later
+E|obrigado|thank you (said by a man)
+E|obrigada|thank you (said by a woman)
+E|por favor|please
+E|se faz favor|please, excuse me (to get attention)
+E|desculpe|sorry, excuse me
+E|com licença|excuse me (to pass)
+E|de nada|you're welcome
+E|sim|yes
+E|não|no, not
+E|tudo bem|all good, how are you
+E|está bem|okay
+E|pois|yes, right (a very Portuguese filler)
+E|pronto|okay then, right (filler)
+E|claro|of course
+E|fixe|cool, great
+E|prazer|nice to meet you
+P|eu|I
+P|tu|you (informal, friends)
+P|você|you (use with care, can sound blunt)
+P|o senhor / a senhora|you (polite)
+P|ele|he
+P|ela|she
+P|nós|we
+P|vocês|you all
+P|eles / elas|they
+P|meu / minha|my
+P|seu / sua|your, his, her
+P|homem|man
+P|mulher|woman, wife
+P|pessoa|person
+P|amigo / amiga|friend
+P|família|family
+P|filho / filha|son / daughter
+P|nome|name
+V|ser|to be (permanent)
+V|estar|to be (temporary, location)
+V|ter|to have
+V|há|there is, there are
+V|fazer|to do, to make
+V|ir|to go
+V|vir|to come
+V|dizer|to say, to tell
+V|dar|to give
+V|ver|to see
+V|saber|to know (facts)
+V|conhecer|to know (people, places)
+V|poder|can, to be able
+V|querer|to want
+V|dever|should, must
+V|precisar de|to need
+V|gostar de|to like
+V|falar|to speak
+V|perceber|to understand
+V|achar|to think (opinion)
+V|ficar|to stay, to be located
+V|chegar|to arrive
+V|sair|to leave, to go out
+V|entrar|to go in
+V|comer|to eat
+V|beber|to drink
+V|pagar|to pay
+V|comprar|to buy
+V|morar|to live (reside)
+V|trabalhar|to work
+V|esperar|to wait, to hope
+V|ajudar|to help
+V|abrir|to open
+V|fechar|to close
+V|levar|to take, to carry
+V|trazer|to bring
+V|chamar-se|to be called
+V|deixar|to leave (something), to let
+V|começar|to start
+V|voltar|to come back
+V|procurar|to look for
+N|dois / duas|two
+N|três|three
+N|quatro|four
+N|cinco|five
+N|seis|six
+N|sete|seven
+N|oito|eight
+N|nove|nine
+N|dez|ten
+N|vinte|twenty
+N|cem|one hundred
+N|mil|one thousand
+Q|que|that, what
+Q|o quê?|what?
+Q|quem?|who?
+Q|onde?|where?
+Q|quando?|when?
+Q|como?|how?
+Q|porquê?|why?
+Q|porque|because
+Q|qual?|which?
+Q|quanto?|how much?
+Q|quantos?|how many?
+Q|e|and
+Q|ou|or
+Q|mas|but
+Q|se|if
+Q|com|with
+Q|sem|without
+Q|de|of, from
+Q|em|in, on
+Q|para|for, to
+Q|por|by, through, per
+Q|a|to, at
+Q|até|until
+T|hoje|today
+T|ontem|yesterday
+T|amanhã|tomorrow
+T|agora|now
+T|depois|after, later
+T|antes|before
+T|sempre|always
+T|nunca|never
+T|dia|day
+T|semana|week
+T|mês|month
+T|ano|year
+T|hora|hour, o'clock
+T|tempo|time, weather
+T|vez|time (occurrence)
+T|manhã|morning
+L|casa|house, home
+L|rua|street
+L|cidade|city, town
+L|país|country
+L|trabalho|work, job
+L|dinheiro|money
+L|conta|bill, account
+L|cartão|card
+L|multibanco|ATM, debit card
+L|telemóvel|mobile phone
+L|carro|car
+L|comboio|train
+L|autocarro|bus
+L|estação|station
+L|bilhete|ticket
+L|casa de banho|bathroom, toilet
+L|quarto|room, bedroom
+L|loja|shop
+L|mercado|market
+L|farmácia|pharmacy
+L|médico|doctor
+L|coisa|thing
+F|pequeno-almoço|breakfast
+F|almoço|lunch
+F|jantar|dinner
+F|café|espresso (in Porto: cimbalino)
+F|água|water
+F|vinho|wine
+F|cerveja|beer (a draught one in the North: fino)
+F|pão|bread (a roll in Porto: molete)
+F|peixe|fish
+F|carne|meat
+D|o / a|the
+D|um / uma|a, one
+D|este / esta|this
+D|isto|this (thing)
+D|isso|that (near you)
+D|aquilo|that (over there)
+D|tudo|everything
+D|nada|nothing
+D|outro / outra|other, another
+D|muito|very, a lot
+D|mais|more
+D|menos|less
+D|pouco|a little
+D|também|also
+D|só|only
+D|já|already, right now
+D|ainda|still, yet
+D|bem|well
+D|aqui|here
+D|ali|there (nearby)
+D|lá|there (far)
+A|bom / boa|good
+A|mau / má|bad
+A|grande|big
+A|pequeno|small
+A|novo|new, young
+A|caro|expensive
+A|barato|cheap
+A|quente|hot, warm
+A|frio|cold
+A|certo|right, correct
+A|difícil|difficult
+A|fácil|easy
+A|aberto|open
+A|fechado|closed`.split("\n").map((l,i)=>{const[c,pt,en]=l.split("|");return{id:i,c,pt,en}});
+
+const PHRASES={
+"Greetings & small talk":`Olá, bom dia!|Hello, good morning!
+Tudo bem? Tudo bem, obrigado.|All good? All good, thanks.
+E consigo?|And you? (polite)
+Como se chama?|What's your name? (polite)
+Então, tás bom?|So, how are you? (casual, very Porto)
+Ó amigo, tudo bem?|Hey friend, all good? (a typical Northern greeting)
+Chamo-me Jason.|My name is Jason.
+Muito prazer.|Very nice to meet you.
+Sou americano. Sou dos Estados Unidos.|I'm American. I'm from the United States.
+Estou a aprender português.|I'm learning Portuguese.
+Falo só um pouco de português.|I only speak a little Portuguese.
+Vou morar em Portugal.|I'm going to live in Portugal.
+Até logo! Até amanhã!|See you later! See you tomorrow!
+Bom fim de semana!|Have a good weekend!`,
+"When you're lost in the conversation":`Desculpe, não percebo.|Sorry, I don't understand.
+Pode repetir, se faz favor?|Could you repeat that, please?
+Pode falar mais devagar?|Could you speak more slowly?
+Fala inglês?|Do you speak English?
+Como se diz isto em português?|How do you say this in Portuguese?
+O que quer dizer isso?|What does that mean?
+Não sei.|I don't know.
+Pode ajudar-me?|Can you help me?`,
+"Café & restaurant":`Bom dia, um cimbalino, se faz favor.|Good morning, an espresso please. (Porto word; café works too)
+Queria uma mesa para dois.|I'd like a table for two.
+O que é que recomenda?|What do you recommend?
+Para mim, o prato do dia.|For me, the dish of the day.
+Uma água sem gás, por favor.|A still water, please.
+Um copo de vinho verde.|A glass of vinho verde (the Minho's own wine).
+Um fino, se faz favor.|A draught beer, please. (In Lisbon it's an imperial.)
+É para comer aqui ou para levar?|To eat here or to take away?
+Estava tudo muito bom.|Everything was very good.
+A conta, se faz favor.|The bill, please.
+Posso pagar com cartão?|Can I pay by card?
+Quer número de contribuinte?|Do you want your tax number (NIF) on the receipt?
+Não, obrigado. Está bem assim.|No, thanks. It's fine like that.`,
+"Shopping":`Quanto custa?|How much does it cost?
+Quanto é?|How much is it (in total)?
+É muito caro.|It's very expensive.
+Tem mais barato?|Do you have anything cheaper?
+Estou só a ver, obrigado.|I'm just looking, thanks.
+Queria isto, se faz favor.|I'd like this, please.
+Tem isto noutro tamanho?|Do you have this in another size?
+Precisa de saco?|Do you need a bag?
+Mais alguma coisa? Não, é só isso.|Anything else? No, that's all.`,
+"Getting around":`Onde fica a estação?|Where is the station?
+Onde é a casa de banho?|Where is the bathroom?
+É longe daqui?|Is it far from here?
+É perto. Fica ali.|It's close. It's over there.
+Vire à direita. Vire à esquerda.|Turn right. Turn left.
+Sempre em frente.|Straight ahead.
+Um bilhete para Braga, se faz favor.|A ticket to Braga, please.
+A que horas sai o comboio?|What time does the train leave?
+Este autocarro vai para a Baixa?|Does this bus go downtown? (Porto's centre is the Baixa)`,
+"Time & plans":`Que horas são?|What time is it?
+São duas e meia.|It's half past two.
+A que horas abre? A que horas fecha?|What time does it open? Close?
+Está aberto hoje?|Is it open today?
+Vamos amanhã de manhã.|Let's go tomorrow morning.
+Tenho de ir agora.|I have to go now.
+Um momento, se faz favor.|One moment, please.
+Ainda não.|Not yet.
+Já está.|Done. That's it.`,
+"Home & paperwork":`Estou à procura de casa.|I'm looking for a house.
+Posso ver a casa?|Can I see the house?
+Quanto é a renda por mês?|How much is the rent per month?
+Preciso de um NIF.|I need a tax number (NIF).
+Onde ficam as Finanças?|Where is the tax office?
+Tenho uma marcação às dez.|I have an appointment at ten.
+Que documentos preciso de trazer?|What documents do I need to bring?
+Queria abrir uma conta no banco.|I'd like to open a bank account.
+Preciso de um picheleiro.|I need a plumber. (Northern word; Lisbon says canalizador)`,
+"Opinions & everyday chat":`Gosto muito.|I like it a lot.
+Não gosto disso.|I don't like that.
+Acho que sim. Acho que não.|I think so. I don't think so.
+É verdade.|That's true.
+Pois é.|Yeah, exactly.
+Que fixe!|How cool!
+Carago!|Wow! Damn! (the Porto exclamation; casual, a bit rude)
+Não faz mal.|No problem. It doesn't matter.
+Tanto faz.|Either way is fine.
+Hoje está frio. Hoje está calor.|It's cold today. It's hot today.
+O que faz na vida?|What do you do for a living?
+Sou engenheiro. Trabalho com computadores.|I'm an engineer. I work with computers.
+Tenho dois cães.|I have two dogs.`,
+"Health & emergencies":`Preciso de um médico.|I need a doctor.
+Onde há uma farmácia?|Where is there a pharmacy?
+Não me sinto bem.|I don't feel well.
+Socorro!|Help!
+Ligue para o cento e doze!|Call 112!`
+};
+
+const SAY=Object.fromEntries(`Olá, bom dia!|oh-LAH, bohn DEE-a!
+Tudo bem? Tudo bem, obrigado.|TOO-doo BAYN? TOO-doo BAYN, o-bree-GAH-doo.
+E consigo?|ee kohn-SEE-goo?
+Como se chama?|KOH-moo s' SHAH-ma?
+Chamo-me Jason.|SHAH-moo-m' Jason.
+Muito prazer.|MWEEN-too pra-ZEHR.
+Sou americano. Sou dos Estados Unidos.|sow a-m'-ree-KA-noo. sow doozh-TAH-doosh oo-NEE-doosh.
+Estou a aprender português.|shTOW a a-pren-DEHR poor-too-GAYSH.
+Falo só um pouco de português.|FAH-loo SAW oom POW-koo d' poor-too-GAYSH.
+Vou morar em Portugal.|bow moo-RAR ayn poor-too-GAHL.
+Até logo! Até amanhã!|a-TEH LAW-goo! a-TEH a-ma-NYAN!
+Bom fim de semana!|bohn feen d' s'-MA-na!
+Desculpe, não percebo.|d'sh-KOOLP, nown p'r-SAY-boo.
+Pode repetir, se faz favor?|POD hr'-p'-TEER, s' fazh fa-BOR?
+Pode falar mais devagar?|POD fa-LAR mysh d'-ba-GAR?
+Fala inglês?|FAH-la een-GLAYSH?
+Como se diz isto em português?|KOH-moo s' DEESH EESH-too ayn poor-too-GAYSH?
+O que quer dizer isso?|oo k' KEHR dee-ZEHR EE-soo?
+Não sei.|nown SAY.
+Pode ajudar-me?|POD a-zhoo-DAR-m'?
+Queria uma mesa para dois.|k'-REE-a OO-ma MAY-za PA-ra DOYSH.
+O que é que recomenda?|oo kee EH k' hr'-koo-MEN-da?
+Para mim, o prato do dia.|PA-ra MEEN, oo PRAH-too doo DEE-a.
+Uma água sem gás, por favor.|OO-ma AH-gwa sayn GAHSH, poor fa-BOR.
+É para comer aqui ou para levar?|EH PA-ra koo-MEHR a-KEE oh PA-ra l'-BAR?
+Estava tudo muito bom.|shTAH-ba TOO-doo MWEEN-too bohn.
+A conta, se faz favor.|a KOHN-ta, s' fazh fa-BOR.
+Posso pagar com cartão?|PAW-soo pa-GAR kohn kar-TOWN?
+Quer número de contribuinte?|KEHR NOO-m'-roo d' kohn-tree-BWEENT?
+Não, obrigado. Está bem assim.|nown, o-bree-GAH-doo. shTAH bayn a-SEEN.
+Quanto custa?|KWAN-too KOOSH-ta?
+Quanto é?|KWAN-too EH?
+É muito caro.|EH MWEEN-too KAH-roo.
+Tem mais barato?|tayn mysh ba-RAH-too?
+Estou só a ver, obrigado.|shTOW SAW a BEHR, o-bree-GAH-doo.
+Queria isto, se faz favor.|k'-REE-a EESH-too, s' fazh fa-BOR.
+Tem isto noutro tamanho?|tayn EESH-too NOW-troo ta-MA-nyoo?
+Precisa de saco?|pr'-SEE-za d' SAH-koo?
+Mais alguma coisa? Não, é só isso.|myz al-GOO-ma KOY-za? nown, EH SAW EE-soo.
+Onde fica a estação?|OHND FEE-ka a shta-SOWN?
+Onde é a casa de banho?|OHND EH a KAH-za d' BA-nyoo?
+É longe daqui?|EH LOHNZH da-KEE?
+É perto. Fica ali.|EH PEHR-too. FEE-ka a-LEE.
+Vire à direita. Vire à esquerda.|BEER ah dee-RAY-ta. BEER ah sh-KEHR-da.
+Sempre em frente.|SAYN-pr' ayn FRENT.
+A que horas sai o comboio?|a kee AW-rash SY oo kohn-BOY-oo?
+Que horas são?|kee AW-rash SOWN?
+São duas e meia.|sown DOO-az ee MAY-a.
+A que horas abre? A que horas fecha?|a kee AW-raz AH-br'? a kee AW-rash FAY-sha?
+Está aberto hoje?|shTAH a-BEHR-too OZH?
+Vamos amanhã de manhã.|BA-mooz a-ma-NYAN d' ma-NYAN.
+Tenho de ir agora.|TAY-nyoo d' EER a-GAW-ra.
+Um momento, se faz favor.|oom moo-MEN-too, s' fazh fa-BOR.
+Ainda não.|a-EEN-da NOWN.
+Já está.|zhah shTAH.
+Estou à procura de casa.|shTOW ah proo-KOO-ra d' KAH-za.
+Posso ver a casa?|PAW-soo BEHR a KAH-za?
+Quanto é a renda por mês?|KWAN-too EH a HREN-da poor MAYSH?
+Preciso de um NIF.|pr'-SEE-zoo d' oom NEEF.
+Onde ficam as Finanças?|OHND FEE-kown ash fee-NAN-sash?
+Tenho uma marcação às dez.|TAY-nyoo OO-ma mar-ka-SOWN ash DESH.
+Que documentos preciso de trazer?|k' doo-koo-MEN-toosh pr'-SEE-zoo d' tra-ZEHR?
+Queria abrir uma conta no banco.|k'-REE-a a-BREER OO-ma KOHN-ta noo BAN-koo.
+Gosto muito.|GOSH-too MWEEN-too.
+Não gosto disso.|nown GOSH-too DEE-soo.
+Acho que sim. Acho que não.|AH-shoo k' SEEN. AH-shoo k' NOWN.
+É verdade.|EH b'r-DAHD.
+Pois é.|poyz EH.
+Que fixe!|k' FEESH!
+Não faz mal.|nown fash MAHL.
+Tanto faz.|TAN-too FASH.
+Hoje está frio. Hoje está calor.|OZH shTAH FREE-oo. OZH shTAH ka-LOR.
+O que faz na vida?|oo k' FASH na BEE-da?
+Sou engenheiro. Trabalho com computadores.|sow en-zh'-NYAY-roo. tra-BAH-lyoo kohn kohn-poo-ta-DOH-r'sh.
+Tenho dois cães.|TAY-nyoo doysh KYNSH.
+Preciso de um médico.|pr'-SEE-zoo d' oom MEH-dee-koo.
+Onde há uma farmácia?|OHND AH OO-ma far-MAH-sya?
+Não me sinto bem.|nown m' SEEN-too BAYN.
+Socorro!|soo-KOH-hroo!
+Ligue para o cento e doze!|LEEG PRA oo SEN-too ee DOHZ!
+Então, tás bom?|en-TOWN, tazh BOHN?
+Ó amigo, tudo bem?|AW a-MEE-goo, TOO-doo BAYN?
+Bom dia, um cimbalino, se faz favor.|bohn DEE-a, oom seen-ba-LEE-noo, s' fazh fa-BOR.
+Um copo de vinho verde.|oom KAW-poo d' BEE-nyoo BEHRD.
+Um fino, se faz favor.|oom FEE-noo, s' fazh fa-BOR.
+Um bilhete para Braga, se faz favor.|oom bee-LYET PRA BRAH-ga, s' fazh fa-BOR.
+Este autocarro vai para a Baixa?|AYSHT ow-toh-KAH-hroo BY PRA a BY-sha?
+Preciso de um picheleiro.|pr'-SEE-zoo d' oom pee-sh'-LAY-roo.
+Carago!|ka-RAH-goo!`.split("\n").map(l=>l.split("|")));
+
+const SOUNDS=[
+["Unstressed vowels nearly vanish","Only the stressed syllable gets a full vowel. The rest are clipped.",[["pequeno","p'KEH-nu"],["telefone","t'l'FON"],["obrigado","o-bree-GAH-du"]]],
+["Final -o sounds like \"oo\"","An o at the end of a word is a short \"u\".",[["carro","KAH-rru"],["novo","NOH-vu"],["muito","MWEEN-tu"]]],
+["Final -e almost disappears","Often just a breath, or nothing at all.",[["noite","NOYT"],["sete","SET"],["leite","LAYT"]]],
+["S before a consonant or at the end = \"sh\"","This is the classic Lisbon-to-Porto sound.",[["dois","DOYSH"],["mais","MYSH"],["estação","shta-SOWN"]]],
+["The nasal -ão","Say \"ow\" through your nose.",[["não","NOWN"],["pão","POWN"],["estação","shta-SOWN"]]],
+["lh is like \"lli\" in million","",[["trabalho","tra-BAH-lyu"],["mulher","moo-LYEHR"],["filha","FEE-lya"]]],
+["nh is like \"ny\" in canyon","",[["amanhã","a-ma-NYAN"],["minha","MEE-nya"],["senhor","s'-NYOR"]]],
+["R at the start, and rr, are throaty","Like a French R, from the back of the throat.",[["rua","HROO-a"],["carro","KAH-hru"],["receber","hr's'BEHR"]]],
+["ch = \"sh\", j and ge/gi = \"zh\"","",[["chave","SHAHV"],["chegar","sh'-GAR"],["hoje","OZH"],["jantar","zhan-TAR"]]],
+["ç = \"s\", and h is silent","",[["começar","koo-m'-SAR"],["obrigado, olá, hora","h is silent"]]],
+["North: V often sounds like B","The trademark of Porto and the Minho. Lisbon keeps a clear V.",[["vinho","BEE-nyoo"],["se faz favor","s' fazh fa-BOR"],["Viana do Castelo","BYA-na doo kash-TEL"]]],
+["North: ou is a full \"ow\"","Lisbon flattens it to \"oh\". The North keeps both parts.",[["pouco","POW-koo"],["estou","shTOW"],["outro","OW-troo"]]],
+["North: ei stays \"ay\"","Lisbon says \"eye\". The North says \"ay\".",[["queijo","KAY-zhoo"],["primeiro","pree-MAY-roo"],["dinheiro","dee-NYAY-roo"]]],
+["North: e before nh, lh, j, ch stays \"ay\"","Lisbon turns it into a dull \"uh\" sound.",[["tenho","TAY-nyoo"],["espelho","sh-PAY-lyoo"],["igreja","ee-GRAY-zha"]]]
+];
+
+const WEEKS=[
+["Sounds + survival basics",["E"],["Greetings & small talk"],["Learn rules 1 to 5 in Sounds.","Learn the 23 essentials. Pois and pronto will be everywhere.","Introduce yourself out loud until it feels automatic."]],
+["People + ser, estar, ter",["P"],["When you're lost in the conversation"],["Sounds rules 6 to 10.","Ser is who you are, estar is how or where you are right now.","Polite Portugal: use o senhor / a senhora with strangers, and often just drop the pronoun."]],
+["Core verbs + numbers",["V","N"],["Café & restaurant"],["The first 20 verbs this week, the rest next week.","Practise prices: tell yourself what things cost in euros.","Order a café out loud, then the bill."]],
+["More verbs + questions",["Q"],["Shopping"],["Finish the verb list.","Turn any statement into a question with onde, quando, quanto.","Learn 'estar a + verb' for 'I am doing': Estou a aprender."]],
+["Time + getting around",["T"],["Getting around","Time & plans"],["Tell the time every time you check your phone.","Plan a pretend train trip from Lisbon to Porto in Portuguese."]],
+["Places, things + food",["L","F"],["Café & restaurant"],["Portugal words differ from Brazil: comboio, autocarro, telemóvel, pequeno-almoço.","Re-run every restaurant phrase without looking."]],
+["Describing + this and that",["D","A"],["Home & paperwork","Opinions & everyday chat"],["Pair adjectives with nouns: casa grande, café quente.","Rehearse an NIF or bank appointment out loud."]],
+["Review + real conversations",[],["Health & emergencies"],["Quiz mode on all 200. Un-tick anything you hesitate on.","Do the whole Phrases tab at normal speed.","Have a 5-minute conversation with a tutor or a Portuguese speaker."]]
+];
+
+/* storage helpers */
+const S={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let known=new Set(S.get("pt-known",[])), weeksDone=new Set(S.get("pt-weeks",[]));
+let rate=S.get("pt-rate",0.95), filter="all", quiz=false;
+
+/* cloud progress: saved to your Claude account so it follows you between Safari, the home screen app and other devices */
+let cloud=null, cloudReady=false, writing=false, pending=false;
+function setSync(t,w){const el=document.getElementById("sync");el.textContent=t;el.classList.toggle("warn",!!w)}
+function snapshot(){return{known:[...known],weeks:[...weeksDone],rate,updated:Date.now()}}
+function save(){
+  S.set("pt-known",[...known]);S.set("pt-weeks",[...weeksDone]);S.set("pt-rate",rate);
+  if(cloudReady)pushCloud();
+}
+async function pushCloud(){
+  if(writing){pending=true;return}
+  writing=true;
+  try{await cloud.set(snapshot());setSync("Progress saved to your account ✓")}
+  catch(e){setSync("Couldn't save to your account. Progress is kept on this phone for now.",true)}
+  writing=false;
+  if(pending){pending=false;pushCloud()}
+}
+async function initCloud(){
+  const timer=setTimeout(()=>{if(!cloudReady)setSync("Progress is saved on this phone only. Sign in to Claude to sync it.",true)},10000);
+  try{
+    const [db,user]=await Promise.all([window.claude?.use?.("db"),window.claude?.use?.("user")]);
+    if(!db||!user){clearTimeout(timer);setSync("Progress is saved on this phone only. Sign in to Claude to sync it.",true);return}
+    const id=await user.id();
+    cloud=db.doc("data/users/"+id+"/progress");
+    const snap=await cloud.get();
+    const d=snap&&(typeof snap.data==="function"?snap.data():snap);
+    const had=known.size+weeksDone.size;
+    if(d&&Array.isArray(d.known)){
+      d.known.forEach(x=>known.add(x));(d.weeks||[]).forEach(x=>weeksDone.add(x));
+      if(typeof d.rate==="number")rate=d.rate;
+    }
+    clearTimeout(timer);cloudReady=true;
+    setRate(rate);renderWords();renderWeeks();
+    if(!d||had>0)await pushCloud();else setSync("Progress saved to your account ✓");
+  }catch(e){clearTimeout(timer);setSync("Progress is saved on this phone only right now.",true)}
+}
+
+/* speech */
+let voice=null;
+function pickVoice(){
+  if(!("speechSynthesis" in window)){setVoiceMsg("Audio isn't available in this browser. Open the page in Safari.",true);return}
+  const vs=speechSynthesis.getVoices();
+  voice=vs.find(v=>/pt[-_]PT/i.test(v.lang)&&/enhanced|premium|joana/i.test(v.name))||vs.find(v=>/pt[-_]PT/i.test(v.lang))||null;
+  if(voice) setVoiceMsg("Voice: "+voice.name+" (Portugal)",false);
+  else if(vs.find(v=>/^pt/i.test(v.lang))) setVoiceMsg("Only a Brazilian voice found. On iPhone: Settings › Accessibility › Spoken Content › Voices › Portuguese (Portugal), then download Joana.",true);
+  else if(vs.length) setVoiceMsg("No Portuguese voice found. On iPhone: Settings › Accessibility › Spoken Content › Voices › Portuguese (Portugal).",true);
+}
+function setVoiceMsg(t,w){const el=document.getElementById("voice");el.textContent=t;el.classList.toggle("warn",w)}
+function clean(t){return t.replace(/\([^)]*\)/g,"").replace(/\s\/\s/g,", ").trim()}
+function speak(text,el,r){
+  if(!("speechSynthesis" in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(clean(text));
+  u.lang="pt-PT"; if(voice)u.voice=voice; u.rate=r||rate;
+  document.querySelectorAll(".speaking").forEach(x=>x.classList.remove("speaking"));
+  if(el){el.classList.add("speaking");u.onend=u.onerror=()=>el.classList.remove("speaking")}
+  speechSynthesis.speak(u);
+}
+if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;setTimeout(pickVoice,800)}else pickVoice();
+
+function setRate(r){rate=r;save();spSlow.setAttribute("aria-pressed",r<0.9);spNorm.setAttribute("aria-pressed",r>=0.9)}
+spSlow.onclick=()=>setRate(0.7); spNorm.onclick=()=>setRate(0.95); setRate(rate);
+
+/* words */
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function renderChips(){
+  const opts=[["all","All 200"],["todo","Still learning"],...Object.entries(CATS).map(([k,v])=>[k,v[0]])];
+  chips.innerHTML=opts.map(([k,l])=>`<button class="chip" type="button" data-f="${k}" aria-pressed="${filter===k}">${l}</button>`).join("");
+}
+chips.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;filter=b.dataset.f;renderChips();renderWords()};
+function renderWords(){
+  const list=WORDS.filter(w=>filter==="all"||(filter==="todo"?!known.has(w.id):w.c===filter));
+  wgrid.innerHTML=list.length?list.map(w=>`<div class="w${known.has(w.id)?" known":""}" data-id="${w.id}"><button class="say" type="button"><span class="pt">${esc(w.pt)}</span><span class="en">${esc(w.en)}</span></button><button class="know" type="button" aria-label="Mark ${esc(w.pt)} as known" aria-pressed="${known.has(w.id)}">✓</button></div>`).join(""):`<p class="note">No words in this filter yet. <button class="btn" type="button" id="clr">Show all 200 words</button></p>`;
+  renderTr(document.getElementById("q").value);
+  kcount.textContent=known.size+" / "+WORDS.length+" known";
+  kbar.style.width=(known.size/WORDS.length*100)+"%";
+}
+wgrid.onclick=e=>{
+  if(e.target.closest("#clr")){filter="all";renderChips();renderWords();return}
+  const card=e.target.closest(".w");if(!card)return;const id=+card.dataset.id;
+  if(e.target.closest(".know")){known.has(id)?known.delete(id):known.add(id);save();renderWords();return}
+  card.classList.add("reveal");speak(WORDS[id].pt,card);
+};
+const wordCard=w=>`<div class="w${known.has(w.id)?" known":""}" data-id="${w.id}"><button class="say" type="button"><span class="pt">${esc(w.pt)}</span><span class="en">${esc(w.en)}</span></button><button class="know" type="button" aria-label="Mark ${esc(w.pt)} as known" aria-pressed="${known.has(w.id)}">✓</button></div>`;
+document.getElementById("q").oninput=()=>{const v=document.getElementById("q").value;qx.hidden=!v;renderTr(v);if(v&&tr.getBoundingClientRect().top<0)scrollTo(0,0)};
+qx.onclick=()=>{const i=document.getElementById("q");i.value="";qx.hidden=true;renderTr("");i.focus()};
+quizBtn.onclick=()=>{quiz=!quiz;quizBtn.setAttribute("aria-pressed",quiz);wgrid.classList.toggle("quiz",quiz);document.querySelectorAll(".w.reveal").forEach(x=>x.classList.remove("reveal"))};
+
+/* search phrases + translate */
+const ALLPH=Object.values(PHRASES).flatMap(t=>t.split("\n").map(l=>{const[pt,en]=l.split("|");return{pt,en}}));
+const norm=t=>t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[?!.,¿¡'"]/g,"").replace(/\s+/g," ").trim();
+let sampler=null, trCache=S.get("pt-tr-north",{}), trBusy=false, trCtl=null;
+const phRow=(pt,en,extra="",cls="",snd=SAY[pt])=>`<div class="ph ${cls}"><button class="say" type="button" data-t="${esc(pt)}"><span class="pt">${esc(pt)}</span>${snd?`<span class="snd">${esc(snd)}</span>`:""}<span class="en">${esc(en)}</span>${extra}</button><button class="slow" type="button" data-t="${esc(pt)}">Slow</button></div>`;
+function renderTr(raw){
+  const el=document.getElementById("tr"), q=norm(raw||"");
+  el.hidden=!q;
+  if(!q){el.innerHTML="";return}
+  const wh=WORDS.filter(w=>norm(w.pt).includes(q)||norm(w.en).includes(q)).slice(0,8);
+  const hits=ALLPH.filter(p=>norm(p.en).includes(q)||norm(p.pt).includes(q)).slice(0,6);
+  let h=wh.length?`<span class="lbl">Words</span><div class="grid">${wh.map(wordCard).join("")}</div>`:"";
+  h+=hits.length?`<span class="lbl">Phrases</span>`+hits.map(p=>phRow(p.pt,p.en)).join(""):"";
+  const c=trCache[q];
+  if(c) h+=`<span class="lbl">Translation</span>`+phRow(c.pt,raw.trim(),c.note?`<span class="tip">${esc(c.note)}</span>`:"","ai",c.say);
+  else if(sampler&&q.length>1) h+=`<button id="trGo" class="btn fill trbtn" type="button">${trBusy?"Translating…":"Translate to Portuguese"}</button>`;
+  else if(!hits.length&&!wh.length) h+=`<p class="note">${"No match in the lists. Live translation of new sentences needs the online version."}</p>`;
+  el.innerHTML=h;
+}
+async function translate(){
+  const raw=document.getElementById("q").value.trim(), q=norm(raw);
+  if(!sampler||!q||trBusy)return;
+  trBusy=true;renderTr(raw);
+  try{
+    const prompt=`Translate the English below into natural, everyday European Portuguese as spoken in the North of Portugal, in Porto and the Minho (not Lisbon, not Brazil): use Northern vocabulary where it differs (e.g. cimbalino, fino, molete, picheleiro, sapatilhas, cruzeta) and Portugal grammar ("estar a + infinitive", comboio, autocarro, telemóvel, pequeno-almoço) and the polite form a learner should use with strangers. If the input is already Portuguese, translate it into English instead. Also give a Northern Portugal (Porto/Minho) accent pronunciation respelling for an English speaker, in this exact style: syllables joined by hyphens, the stressed syllable in CAPITALS, an apostrophe for a vowel that is barely said, "sh" for S before a consonant or at the end, "zh" for j/ge/gi, "ny" for nh, "ly" for lh, "own" for -ão, "oo" for final -o, "B" where a Northerner turns V into B, "ow" for ou, "ay" for ei. Example: "Desculpe, não percebo." -> "d'sh-KOOLP, nown p'r-SAY-boo." and "Se faz favor." -> "s' fazh fa-BOR." Reply with JSON only: {"pt": "<the translation>", "say": "<respelling of the Portuguese>", "note": "<one short tip for a learner, max 15 words, or empty>"}\n\nText: ${raw}`;
+    let v;
+    try{v=await sampler.json(prompt,{modelTier:"quick"})}catch(e){if(e&&e.code)throw e;const r=await sampler(prompt,{modelTier:"quick"});v=JSON.parse(r.text.replace(/^[^{]*/,"").replace(/[^}]*$/,""))}
+    if(v&&v.pt){trCache[q]={pt:String(v.pt),say:String(v.say||""),note:String(v.note||"")};S.set("pt-tr-north",trCache);trBusy=false;renderTr(raw);speak(trCache[q].pt,document.querySelector("#tr .ph.ai"));return}
+    throw new Error("empty");
+  }catch(e){
+    trBusy=false;
+    if(e&&e.code==="not_granted"){sampler=false;renderTr(raw);return}
+    renderTr(raw);
+    document.getElementById("tr").insertAdjacentHTML("beforeend",`<p class="note">${e&&e.code==="rate_limited"?"Too many translations at once. Wait a minute and try again.":"Couldn't translate that. Check your connection and tap Translate again."}</p>`);
+  }
+}
+tr.onclick=e=>{
+  if(e.target.closest("#trGo")){translate();return}
+  const card=e.target.closest(".w");
+  if(card){const id=+card.dataset.id;if(e.target.closest(".know")){known.has(id)?known.delete(id):known.add(id);save();renderWords();return}speak(WORDS[id].pt,card);return}
+  const b=e.target.closest(".ph button");if(b)speak(b.dataset.t,b.closest(".ph"),b.classList.contains("slow")?0.6:null);
+};
+document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();const t=tr.querySelector("#trGo");if(t)translate();document.getElementById("q").blur()}});
+(async()=>{try{sampler=(await window.claude?.use?.("sample"))||false}catch(e){sampler=false}renderTr(document.getElementById("q").value)})();
+
+/* phrases */
+plist.innerHTML=Object.entries(PHRASES).map(([g,t])=>`<h3 id="g-${g.replace(/\W+/g,"-")}">${g}</h3>`+t.split("\n").map(l=>{const[pt,en]=l.split("|");return phRow(pt,en)}).join("")).join("");
+plist.onclick=e=>{const b=e.target.closest("button");if(!b)return;speak(b.dataset.t,b.closest(".ph"),b.classList.contains("slow")?0.6:null)};
+
+/* sounds */
+slist.innerHTML=SOUNDS.map(([t,d,ex],i)=>`<div class="sound"><b>${i+1}. ${t}</b>${d?`<p class="note">${d}</p>`:""}<div class="ex">${ex.map(([w,h])=>`<button type="button" data-t="${esc(w)}">${esc(w)} <small>${esc(h)}</small></button>`).join("")}</div></div>`).join("");
+slist.onclick=e=>{const b=e.target.closest("button");if(b)speak(b.dataset.t,null,0.8)};
+
+/* plan */
+function renderWeeks(){
+  weeks.innerHTML=WEEKS.map(([t,cats,groups,items],i)=>`<div class="week${weeksDone.has(i)?" done":""}"><div class="wk"><h2>${t}</h2><span>Week ${i+1}</span></div><ul>${items.map(x=>`<li>${x}</li>`).join("")}</ul><div class="acts">${cats.map(c=>`<button class="btn" type="button" data-cat="${c}">${CATS[c][0]} words</button>`).join("")}${groups.map(g=>`<button class="btn" type="button" data-g="${g}">${g}</button>`).join("")}<button class="btn${weeksDone.has(i)?" fill":""}" type="button" data-done="${i}">${weeksDone.has(i)?"Done ✓":"Mark week done"}</button></div></div>`).join("");
+}
+weeks.onclick=e=>{
+  const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.cat){filter=b.dataset.cat;renderChips();renderWords();location.hash="words";scrollTo(0,0)}
+  else if(b.dataset.g){location.hash="phrases";setTimeout(()=>{const h=document.getElementById("g-"+b.dataset.g.replace(/\W+/g,"-"));h&&h.scrollIntoView()},30)}
+  else if(b.dataset.done){const i=+b.dataset.done;weeksDone.has(i)?weeksDone.delete(i):weeksDone.add(i);save();renderWeeks()}
+};
+
+/* move progress between versions */
+mvCopy.onclick=()=>{
+  const code="PT1."+btoa(JSON.stringify({k:[...known],w:[...weeksDone]}));
+  mvCode.value=code;mvCode.hidden=false;
+  const done=()=>{mvMsg.textContent="Copied. Paste it into the other version's Plan tab."};
+  try{navigator.clipboard.writeText(code).then(done,()=>{mvCode.select();mvMsg.textContent="Select the code above and copy it."})}catch(e){mvCode.select();mvMsg.textContent="Select the code above and copy it."}
+};
+mvGo.onclick=()=>{
+  try{
+    const v=mvIn.value.trim();if(!v.startsWith("PT1."))throw 0;
+    const d=JSON.parse(atob(v.slice(4)));const before=known.size;
+    (d.k||[]).forEach(x=>{if(Number.isInteger(x)&&x>=0&&x<WORDS.length)known.add(x)});
+    (d.w||[]).forEach(x=>{if(Number.isInteger(x)&&x>=0&&x<WEEKS.length)weeksDone.add(x)});
+    save();renderWords();renderWeeks();mvIn.value="";
+    mvMsg.textContent="Added "+(known.size-before)+" words. You now know "+known.size+" of "+WORDS.length+".";
+  }catch(e){mvMsg.textContent="That code didn't work. Copy it again from the other version and paste the whole thing."}
+};
+
+/* routing */
+const VIEWS=["words","phrases","sounds","plan"];
+function route(){const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):"words";
+  VIEWS.forEach(x=>document.getElementById("v-"+x).hidden=x!==v);
+  document.querySelectorAll("nav a").forEach(a=>a.toggleAttribute("aria-current",a.dataset.v===v)&&a.setAttribute("aria-current","page"));}
+addEventListener("hashchange",route);
+
+document.getElementById("q").value="";
+renderChips();renderWords();renderWeeks();route();
+if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
+function netState(){const el=document.getElementById("net");el.textContent=navigator.onLine?"Offline app. Saved on this phone, works without a connection.":"You're offline. Everything here still works.";}
+addEventListener("online",netState);addEventListener("offline",netState);netState();
+</script>
+
+</body>
+</html>
