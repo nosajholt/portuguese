@@ -7,7 +7,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Português">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#f5f7fb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0d1424" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
@@ -38,6 +37,11 @@ img{max-width:100%}
 .trbtn{align-self:flex-start}
 .ph.ai{border-color:var(--cobalt)}
 .mv{flex:1 1 200px;min-width:0;font:inherit;font-size:.9rem;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:100%;word-break:break-all}
+.steps{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:2px}
+#getApp{text-decoration:none;display:inline-block}
+.other summary{cursor:pointer;color:var(--muted);font-size:.9rem}
+.other{display:flex;flex-direction:column;gap:8px}
+.other[open]>*+*{margin-top:8px}
 .snd{color:var(--ochre);font-size:.84rem;font-style:italic;letter-spacing:.01em}
 .ph .tip{color:var(--muted);font-size:.85rem}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5}
@@ -181,10 +185,17 @@ input[type=search]{flex:1 1 180px;min-width:0;font:inherit;padding:9px 12px;bord
     <div id="weeks" class="list"></div>
     <div class="week" id="move">
       <div class="wk"><h2>Move your progress</h2></div>
-      <p class="note">Copy a code from one version (online or offline app) and paste it into the other. Ticked words and finished weeks are added, never removed.</p>
-      <div class="acts"><button id="mvCopy" class="btn fill" type="button">Copy progress code</button></div>
-      <textarea id="mvCode" class="mv" rows="3" readonly hidden aria-label="Your progress code"></textarea>
-      <div class="acts"><input id="mvIn" class="mv" type="text" placeholder="Paste a progress code" aria-label="Paste a progress code" autocomplete="off"><button id="mvGo" class="btn" type="button">Add progress</button></div>
+      <div id="getWrap" class="list" hidden>
+        <p class="note">Use this to study with no connection, like on a plane. It brings your ticked words with it.</p>
+        <ol class="steps"><li>Tap the button below. Safari opens the app.</li><li>In Safari, tap Share, then <b>Add to Home Screen</b>.</li><li>Open it from your home screen. It now works offline.</li></ol>
+        <div class="acts"><a id="getApp" class="btn fill" href="https://nosajholt.github.io/portuguese/" target="_blank" rel="noopener">Open the offline app with my progress</a></div>
+      </div>
+      <details class="other" open><summary>Move progress with a code instead</summary>
+        <p class="note">Copy the code in one version and paste it into the other. Ticked words are added, never removed.</p>
+        <div class="acts"><button id="mvCopy" class="btn" type="button">Copy progress code</button></div>
+        <textarea id="mvCode" class="mv" rows="3" readonly hidden aria-label="Your progress code"></textarea>
+        <div class="acts"><input id="mvIn" class="mv" type="text" placeholder="Paste a progress code" aria-label="Paste a progress code" autocomplete="off"><button id="mvGo" class="btn" type="button">Add progress</button></div>
+      </details>
       <p id="mvMsg" class="note" aria-live="polite"></p>
     </div>
     <div class="week">
@@ -769,20 +780,26 @@ weeks.onclick=e=>{
 };
 
 /* move progress between versions */
+const progCode=()=>"PT1."+btoa(JSON.stringify({k:[...known],w:[...weeksDone]}));
+const APP_URL="https://nosajholt.github.io/portuguese/";
+getApp.onclick=()=>{getApp.href=APP_URL+"?p="+encodeURIComponent(progCode())};
+function importCode(v){
+  if(!v||!v.startsWith("PT1."))throw 0;
+  const d=JSON.parse(atob(v.slice(4)));const before=known.size;
+  (d.k||[]).forEach(x=>{if(Number.isInteger(x)&&x>=0&&x<WORDS.length)known.add(x)});
+  (d.w||[]).forEach(x=>{if(Number.isInteger(x)&&x>=0&&x<WEEKS.length)weeksDone.add(x)});
+  save();renderWords();renderWeeks();return known.size-before;
+}
 mvCopy.onclick=()=>{
-  const code="PT1."+btoa(JSON.stringify({k:[...known],w:[...weeksDone]}));
+  const code=progCode();
   mvCode.value=code;mvCode.hidden=false;
   const done=()=>{mvMsg.textContent="Copied. Paste it into the other version's Plan tab."};
   try{navigator.clipboard.writeText(code).then(done,()=>{mvCode.select();mvMsg.textContent="Select the code above and copy it."})}catch(e){mvCode.select();mvMsg.textContent="Select the code above and copy it."}
 };
 mvGo.onclick=()=>{
   try{
-    const v=mvIn.value.trim();if(!v.startsWith("PT1."))throw 0;
-    const d=JSON.parse(atob(v.slice(4)));const before=known.size;
-    (d.k||[]).forEach(x=>{if(Number.isInteger(x)&&x>=0&&x<WORDS.length)known.add(x)});
-    (d.w||[]).forEach(x=>{if(Number.isInteger(x)&&x>=0&&x<WEEKS.length)weeksDone.add(x)});
-    save();renderWords();renderWeeks();mvIn.value="";
-    mvMsg.textContent="Added "+(known.size-before)+" words. You now know "+known.size+" of "+WORDS.length+".";
+    const n=importCode(mvIn.value.trim());mvIn.value="";
+    mvMsg.textContent="Added "+n+" words. You now know "+known.size+" of "+WORDS.length+".";
   }catch(e){mvMsg.textContent="That code didn't work. Copy it again from the other version and paste the whole thing."}
 };
 
@@ -798,6 +815,10 @@ renderChips();renderWords();renderWeeks();route();
 if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
 function netState(){const el=document.getElementById("net");el.textContent=navigator.onLine?"Offline app. Saved on this phone, works without a connection.":"You're offline. Everything here still works.";}
 addEventListener("online",netState);addEventListener("offline",netState);netState();
+/* progress handed over from the Claude page via ?p= (kept in the URL so Add to Home Screen carries it) */
+(()=>{let p=null;try{p=new URLSearchParams(location.search).get("p")}catch(e){}
+  if(!p||S.get("pt-imported","")===p)return;
+  try{const n=importCode(p);S.set("pt-imported",p);const el=document.getElementById("net");el.textContent="Brought over your progress: "+known.size+" of "+WORDS.length+" words known.";}catch(e){}})();
 </script>
 
 </body>
