@@ -687,12 +687,26 @@ function pickVoice(){
   else if(vs.length) setVoiceMsg("No Portuguese voice found. On iPhone: Settings › Accessibility › Spoken Content › Voices › Portuguese (Portugal).",true);
 }
 document.getElementById("vsel").onchange=e=>{S.set("pt-voice",e.target.value);pickVoice();speak("Olá, tudo bem?")};
-function setVoiceMsg(t,w){const el=document.getElementById("voice");el.textContent=t;el.classList.toggle("warn",w)}
+function setVoiceMsg(t,w){if(CLIPS&&!/recorded/.test(t))return;const el=document.getElementById("voice");el.textContent=t;el.classList.toggle("warn",w)}
 function clean(t){return t.replace(/\([^)]*\)/g,"").replace(/\s\/\s/g,", ").trim()}
+/* recorded male voice: audio/index.json maps each text to an mp3; anything else uses the phone's voice */
+let CLIPS=null, player=null;
+fetch("audio/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.clips&&Object.keys(d.clips).length){CLIPS=d.clips;setVoiceMsg("Voice: recorded male Portugal voice. Your phone's voice reads live translations.",false)}}).catch(()=>{});
+function stopAll(){try{player&&player.pause()}catch(e){} if("speechSynthesis" in window)speechSynthesis.cancel()}
 function speak(text,el,r){
+  const t=clean(text), rr=r||rate;
+  stopAll();
+  document.querySelectorAll(".speaking").forEach(x=>x.classList.remove("speaking"));
+  if(CLIPS&&CLIPS[t]){
+    player=new Audio(CLIPS[t]);
+    player.playbackRate=rr<0.65?0.7:rr<0.9?0.8:1;
+    try{player.preservesPitch=true}catch(e){}
+    if(el){el.classList.add("speaking");player.onended=player.onerror=()=>el.classList.remove("speaking")}
+    player.play().catch(()=>{el&&el.classList.remove("speaking");CLIPS=Object.assign({},CLIPS,{[t]:null});speak(text,el,r)});
+    return;
+  }
   if(!("speechSynthesis" in window))return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(clean(text));
+  const u=new SpeechSynthesisUtterance(t);
   u.lang="pt-PT"; if(voice)u.voice=voice; u.rate=r||rate;
   document.querySelectorAll(".speaking").forEach(x=>x.classList.remove("speaking"));
   if(el){el.classList.add("speaking");u.onend=u.onerror=()=>el.classList.remove("speaking")}
