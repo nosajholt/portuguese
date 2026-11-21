@@ -79,6 +79,8 @@ p{margin:0}
 .seg button{border:0;background:transparent;color:var(--ink);font:inherit;font-size:.9rem;padding:6px 12px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--cobalt);color:var(--paper)}
 .voice{font-size:.85rem;padding:8px 12px;border-radius:10px;background:var(--tile);color:var(--ink)}
+.vpick{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--muted)}
+.vpick select{font:inherit;font-size:.9rem;padding:6px 8px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);max-width:62vw}
 .voice.warn{border-left:4px solid var(--ochre)}
 input[type=search]{flex:1 1 180px;min-width:0;font:inherit;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
 .chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
@@ -140,6 +142,7 @@ input[type=search]{flex:1 1 180px;min-width:0;font:inherit;padding:9px 12px;bord
   <section id="tr" class="tr" hidden aria-live="polite"></section>
   <div class="bar">
     <div id="voice" class="voice">Checking for a Portugal voice…</div>
+    <label class="vpick" for="vsel"><span>Voice</span><select id="vsel"><option>Loading voices…</option></select></label>
     <div id="net" class="voice">Offline app. Works without a connection.</div>
     <div class="seg" role="group" aria-label="Speed">
       <button id="spSlow" type="button" aria-pressed="false">Slow</button>
@@ -187,7 +190,7 @@ input[type=search]{flex:1 1 180px;min-width:0;font:inherit;padding:9px 12px;bord
       <div class="wk"><h2>Move your progress</h2></div>
       <div id="getWrap" class="list" hidden>
         <p class="note">Use this to study with no connection, like on a plane. It brings your ticked words with it.</p>
-        <ol class="steps"><li>Tap the button below. Safari opens the app.</li><li>In Safari, tap Share, then <b>Add to Home Screen</b>.</li><li>Open it from your home screen. It now works offline.</li></ol>
+        <ol class="steps"><li>Tap the button below. Your browser opens the app.</li><li>In Vivaldi: tap the Vivaldi menu, then <b>Share Page</b>, then <b>Add to Home Screen</b>. Keep <b>Open as Web App</b> switched on and tap <b>Add</b>. (In Safari: Share, then Add to Home Screen.)</li><li>Open it from your home screen once while online. After that it works offline.</li></ol>
         <div class="acts"><a id="getApp" class="btn fill" href="https://nosajholt.github.io/portuguese/" target="_blank" rel="noopener">Open the offline app with my progress</a></div>
       </div>
       <details class="other" open><summary>Move progress with a code instead</summary>
@@ -211,6 +214,7 @@ input[type=search]{flex:1 1 180px;min-width:0;font:inherit;padding:9px 12px;bord
 </div></main>
 
 <script>
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const CATS={E:["Essentials",1],P:["People",2],V:["Verbs",3],N:["Numbers",3],Q:["Questions & links",4],T:["Time",5],L:["Places & things",6],F:["Food & drink",6],D:["This, that, how much",7],A:["Describing",7]};
 const WORDS=`E|olá|hello
 E|bom dia|good morning
@@ -669,11 +673,20 @@ let voice=null;
 function pickVoice(){
   if(!("speechSynthesis" in window)){setVoiceMsg("Audio isn't available in this browser. Open the page in Safari.",true);return}
   const vs=speechSynthesis.getVoices();
-  voice=vs.find(v=>/pt[-_]PT/i.test(v.lang)&&/enhanced|premium|joana/i.test(v.name))||vs.find(v=>/pt[-_]PT/i.test(v.lang))||null;
-  if(voice) setVoiceMsg("Voice: "+voice.name+" (Portugal)",false);
+  const isPT=v=>/pt[-_]PT/i.test(v.lang), isPt=v=>/^pt/i.test(v.lang);
+  const MALE=/joaquim|cristiano|duarte|tiago|diogo|rui|daniel|felipe|male|homem/i;
+  const pts=vs.filter(isPt).sort((a,b)=>(isPT(b)-isPT(a))||(MALE.test(b.name)-MALE.test(a.name))||a.name.localeCompare(b.name));
+  const saved=S.get("pt-voice","");
+  voice=pts.find(v=>v.name===saved)||pts.find(v=>isPT(v)&&MALE.test(v.name))||vs.find(v=>isPT(v)&&/enhanced|premium|joana/i.test(v.name))||pts.find(isPT)||null;
+  const sel=document.getElementById("vsel");
+  sel.innerHTML=pts.length?pts.map(v=>`<option value="${esc(v.name)}"${v===voice?" selected":""}>${esc(v.name)} (${isPT(v)?"Portugal":"Brazil"})</option>`).join(""):"<option>No Portuguese voices</option>";
+  sel.disabled=!pts.length;
+  const malePT=pts.some(v=>isPT(v)&&MALE.test(v.name));
+  if(voice&&isPT(voice)) setVoiceMsg(malePT?"Voice: "+voice.name+" (Portugal)":"No male Portugal voice found on this phone, so it uses "+voice.name+". Pick another voice below.",!malePT);
   else if(vs.find(v=>/^pt/i.test(v.lang))) setVoiceMsg("Only a Brazilian voice found. On iPhone: Settings › Accessibility › Spoken Content › Voices › Portuguese (Portugal), then download Joana.",true);
   else if(vs.length) setVoiceMsg("No Portuguese voice found. On iPhone: Settings › Accessibility › Spoken Content › Voices › Portuguese (Portugal).",true);
 }
+document.getElementById("vsel").onchange=e=>{S.set("pt-voice",e.target.value);pickVoice();speak("Olá, tudo bem?")};
 function setVoiceMsg(t,w){const el=document.getElementById("voice");el.textContent=t;el.classList.toggle("warn",w)}
 function clean(t){return t.replace(/\([^)]*\)/g,"").replace(/\s\/\s/g,", ").trim()}
 function speak(text,el,r){
@@ -691,7 +704,6 @@ function setRate(r){rate=r;save();spSlow.setAttribute("aria-pressed",r<0.9);spNo
 spSlow.onclick=()=>setRate(0.7); spNorm.onclick=()=>setRate(0.95); setRate(rate);
 
 /* words */
-const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function renderChips(){
   const opts=[["all","All 200"],["todo","Still learning"],...Object.entries(CATS).map(([k,v])=>[k,v[0]])];
   chips.innerHTML=opts.map(([k,l])=>`<button class="chip" type="button" data-f="${k}" aria-pressed="${filter===k}">${l}</button>`).join("");
